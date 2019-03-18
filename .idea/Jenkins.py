@@ -1,30 +1,22 @@
 from selenium import webdriver
-# 引入 Keys 模块
-from selenium.webdriver.common.keys import Keys
 
 driver = webdriver.Chrome()
 driver.get("http://www.baidu.com")
 
-# 输入框输入内容
-driver.find_element_by_id("kw").send_keys("Jenkins")
+# 获得输入框的尺寸
+size = driver.find_element_by_id('kw').size
+print(size)
 
-# 删除多输入的一个 m
-driver.find_element_by_id("kw").send_keys(Keys.BACK_SPACE)
+# 返回百度页面底部备案信息
+text = driver.find_element_by_id("cp").text
+print(text)
 
+# 返回元素的属性值， 可以是 id、 name、 type 或其他任意属性
+attribute = driver.find_element_by_id("kw").get_attribute('type')
+print(attribute)
 
-# 输入空格键+“教程”
-driver.find_element_by_id("kw").send_keys(Keys.SPACE)
-driver.find_element_by_id("kw").send_keys("教程")
+# 返回元素的结果是否可见， 返回结果为 True 或 False
+result = driver.find_element_by_id("kw").is_displayed()
+print(result)
 
-# ctrl+a 全选输入框内容
-driver.find_element_by_id("kw").send_keys(Keys.CONTROL, 'a')
-
-# ctrl+x 剪切输入框内容
-driver.find_element_by_id("kw").send_keys(Keys.CONTROL, 'x')
-
-# ctrl+v 粘贴内容到输入框
-driver.find_element_by_id("kw").send_keys(Keys.CONTROL, 'v')
-
-# 通过回车键来代替单击操作
-driver.find_element_by_id("su").send_keys(Keys.ENTER)
 driver.quit()
